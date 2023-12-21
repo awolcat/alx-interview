@@ -9,6 +9,7 @@ import sys
 import signal
 
 
+
 def string_gen(code, count):
     """Return a populated or empty string based on count"""
     if type(count) is not int or count < 1:
@@ -35,9 +36,7 @@ error_404 = 0
 error_405 = 0
 error_500 = 0
 for line in sys.stdin:
-    line = line.split()
-    if len(line) != 9:
-        continue
+    line = line.split(" ")
     global_count += 1
     size = int(line[-1])
     status = int(line[-2])
