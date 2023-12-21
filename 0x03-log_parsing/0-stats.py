@@ -6,7 +6,6 @@
     and/or on receipt of CTRL+C interrupt
 """
 import sys
-import signal
 
 
 def string_gen(code, count):
