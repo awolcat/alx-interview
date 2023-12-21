@@ -1,5 +1,7 @@
-#!/usr/bin/env python3
-"""Read stdin and tally stats.
+#!/usr/bin/python3
+"""Sript to read stdin and tally stats.
+    Input format: <IP Address> - [<date>] 
+    "GET /projects/260 HTTP/1.1" <status code> <file size>
     Print stats after every 10 lines
     and/or on receipt of CTRL+C interrupt
 """
@@ -33,8 +35,10 @@ error_404 = 0
 error_405 = 0
 error_500 = 0
 for line in sys.stdin:
-    global_count += 1
     line = line.split()
+    if len(line) != 9:
+        continue
+    global_count += 1
     size = int(line[-1])
     status = int(line[-2])
     file_size += size
