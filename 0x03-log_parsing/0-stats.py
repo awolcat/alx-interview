@@ -8,68 +8,42 @@
 import sys
 
 
-def string_gen(code, count):
-    """Return a populated or empty string based on count"""
-    if type(count) is not int or count < 1:
-        return ""
-    return "{}: {}\n".format(code, count)
+status_codes = {'200': 0, '301': 0, '400': 0, '401': 0, '403': 0,
+                '404': 0, '405': 0, '500': 0}
 
-
-global_count = 0
-file_size = 0
-success_200 = 0
-redirect_301 = 0
-error_400 = 0
-error_401 = 0
-error_403 = 0
-error_404 = 0
-error_405 = 0
-error_500 = 0
+total_size = 0
+line_count = 0
 
 try:
     for line in sys.stdin:
-        line = line.split(" ")
-        global_count += 1
-        size = int(line[-1])
-        status = int(line[-2])
-        file_size += size
+        line_list = line.split(" ")
 
-        # Calculate count for each status code
-        if status == 200:
-            success_200 += 1
-        elif status == 301:
-            redirect_301 += 1
-        elif status == 400:
-            error_400 += 1
-        elif status == 401:
-            error_401 += 1
-        elif status == 403:
-            error_403 += 1
-        elif status == 404:
-            error_404 += 1
-        elif status == 405:
-            error_405 += 1
-        elif status == 500:
-            error_500 += 1
-        else:
-            pass
+        if len(line_list) > 4:
+            status_code = line_list[-2]
+            file_size = int(line_list[-1])
 
-        # Output string
-        out = (f"File size: {file_size}\n"
-               f"{string_gen(200, success_200)}"
-               f"{string_gen(301, redirect_301)}"
-               f"{string_gen(400, error_400)}"
-               f"{string_gen(401, error_401)}"
-               f"{string_gen(403, error_403)}"
-               f"{string_gen(404, error_404)}"
-               f"{string_gen(405, error_405)}"
-               f"{string_gen(500, error_500)}"
-               )
+            # check if the status code received exists and increment
+            if status_code in status_codes.keys():
+                status_codes[status_code] += 1
 
-        # Print conditionally
-        if global_count % 10 == 0:
-            print(out, end="")
-except Exception:
+            # update total file size
+            total_size += file_size
+
+            # update line count
+            line_count += 1
+
+        # Print output
+        if line_count % 10 == 0:
+            print('File size: {}'.format(total_size))
+            for key, value in sorted(status_codes.items()):
+                if value != 0:
+                    print('{}: {}'.format(key, value))
+
+except Exception as err:
     pass
+
 finally:
-    print(out, end="")
+    print('File size: {}'.format(total_size))
+    for key, value in sorted(status_codes.items()):
+        if value != 0:
+            print('{}: {}'.format(key, value))
