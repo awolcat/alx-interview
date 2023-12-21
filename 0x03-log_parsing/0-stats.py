@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Sript to read stdin and tally stats.
-    Input format: <IP Address> - [<date>] 
+    Input format: <IP Address> - [<date>]
     "GET /projects/260 HTTP/1.1" <status code> <file size>
     Print stats after every 10 lines
     and/or on receipt of CTRL+C interrupt
