@@ -9,7 +9,6 @@ import sys
 import signal
 
 
-
 def string_gen(code, count):
     """Return a populated or empty string based on count"""
     if type(count) is not int or count < 1:
