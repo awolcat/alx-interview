@@ -8,28 +8,28 @@ def count_zeros(grid, r, c):
     """
     zeros = 0
     # check up
-    if (r != 0):
+    try:
         if grid[r - 1][c] == 0:
             zeros += 1
-    else:
+    except Exception:
         zeros += 1
     # check down
-    if (r < len(grid) - 1):
+    try:
         if grid[r + 1][c] == 0:
             zeros += 1
-    else:
+    except Exception:
         zeros += 1
     # check left
-    if (c != 0):
+    try:
         if grid[r][c - 1] == 0:
             zeros += 1
-    else:
+    except Exception:
         zeros += 1
     # check right
-    if (c < len(grid[r]) - 1):
+    try:
         if grid[r][c + 1] == 0:
             zeros += 1
-    else:
+    except Exception:
         zeros += 1
     return zeros
 
@@ -39,7 +39,7 @@ def island_perimeter(grid):
     """
     perimeter = 0
     for r in range(len(grid)):
-        for c in range(len(grid)):
+        for c in range(len(grid[r])):
             # check for 1,
             # if 1, check up, down, left, right for 1 and count ones found.
             # zeros = 4 - ones found
