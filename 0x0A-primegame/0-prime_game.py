@@ -3,11 +3,12 @@
 def is_prime(x):
     return x > 1 and x % 2 != 0 and x % 3 != 0
 
+
 def isWinner(rounds, array):
     """Find winner
     """
     if rounds > len(array):
-        return('')
+        return
     this_round = {'Ben': 0, 'Mariah': 0}
     overall = {'Ben': 0, 'Mariah': 0}
     for run in range(rounds):
