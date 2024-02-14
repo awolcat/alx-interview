@@ -1,12 +1,17 @@
 #!/usr/bin/python3
-
+"""Prime Game
+"""
 def is_prime(x):
+    """Find prime
+    """
     return x > 1 and x % 2 != 0 and x % 3 != 0
 
 
-def isWinner(rounds, array):
+def isWinner(x, nums):
     """Find winner
     """
+    rounds = x
+    array = nums
     if rounds > len(array):
         return
     this_round = {'Ben': 0, 'Mariah': 0}
